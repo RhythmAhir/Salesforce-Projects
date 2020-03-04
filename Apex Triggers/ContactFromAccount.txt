@@ -1,0 +1,14 @@
+trigger ContactFromAccount on Account (after insert) {
+    List <Contact> addContact = New List<Contact>();
+    
+    for(Account a : Trigger.new){
+        
+        String first = a.Name.subStringBefore(' ');
+        String last = a.Name.subStringAfter(' ');
+        
+        Contact C = new Contact(AccountId = a.Id, FirstName = first, LastName = last, Phone = a.Phone);
+        addContact.add(C);
+    }
+    
+    insert addContact;
+}

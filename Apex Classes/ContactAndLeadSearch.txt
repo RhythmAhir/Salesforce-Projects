@@ -1,0 +1,12 @@
+public class ContactAndLeadSearch {
+ public static List<list<sObject>> searchContactsAndLeads (String First){
+        List<list<sObject>> searchdata = new List<list<sObject>>();
+        
+        searchdata =[Find :First IN ALL Fields RETURNING Contact(Firstname,Lastname),Lead(Firstname,Lastname)];
+        system.debug('@@@@'+searchdata);
+        Return searchdata;
+        
+        
+    }
+    
+}

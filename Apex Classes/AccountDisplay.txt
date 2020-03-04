@@ -1,0 +1,6 @@
+public class AccountDisplay {
+    public List<Account> getAccounts(){
+        List<Account> result = Database.Query('Select Id, Name, Phone, (Select Id, Name, Email from Contacts) From Account');   
+        return result;
+            }
+}

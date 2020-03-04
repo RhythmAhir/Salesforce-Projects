@@ -1,0 +1,7 @@
+public with sharing class LightingMapAura {
+@AuraEnabled
+    public static List<Contact> getContact() {
+        return [SELECT Id, Name, Meeting_Location__c, Meeting_Date_Time__c
+                FROM Contact];
+    }
+}

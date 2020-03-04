@@ -1,0 +1,8 @@
+@isTest
+public class TestAcccountDisplay {
+    @isTest static void testing(){
+        ListAccount accounts = [Select Id, Name from Account];
+        AccountDisplay Ad = new AccountDisplay();
+        System.assertEquals(accounts, Ad.getAccounts());
+    }
+}

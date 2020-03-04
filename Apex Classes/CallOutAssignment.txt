@@ -1,0 +1,90 @@
+public with sharing class CallOutAssignment {
+
+    public static String apiKey = 'Bearer ey-qAQ7SMZNdk85xVMqkiK6PSegsUryEkDO9AoFm8sS-HfOugU2e_fvhgcJTZU8V6MpEbfr_KPXDXkrCE-oUQbsyPYWhi3Q3IftKfJn2m2OXIuvkkw3NLZm9xi43XnYx';
+    public static String sEndpoint = 'https://api.yelp.com/v3';
+     
+    public static String BussinessSearchCallout(String location, integer radius) {
+        
+        String Endpoint = sEndpoint + '/businesses/search?location=' + location + '&radius' + radius;
+        
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(Endpoint);
+        request.setMethod('GET');
+        request.setHeader('Authorization', apiKey);
+         
+        HttpResponse response = http.send(request);
+
+        return response.getBody();
+    }
+     public static String PhoneSearchCallout(String Phone) {
+        
+        String Endpoint = sEndpoint + '/businesses/search/phone?Phone=' + Phone;
+        
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(Endpoint);
+        request.setMethod('GET');
+        request.setHeader('Authorization', apiKey);
+         
+        HttpResponse response = http.send(request);
+
+        return response.getBody();
+    }
+     public static String TransactionSearchCallout(String location) {
+        
+        String Endpoint = sEndpoint + '/transactions/delivery/search?location=' + location;
+        
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(Endpoint);
+        request.setMethod('GET');
+        request.setHeader('Authorization', apiKey);
+         
+        HttpResponse response = http.send(request);
+
+        return response.getBody();
+    }
+     public static String DetailsSearchCallout(String locale) {
+        
+        String Endpoint = sEndpoint + '/businesses/' + locale;
+        
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(Endpoint);
+        request.setMethod('GET');
+        request.setHeader('Authorization', apiKey);
+         
+        HttpResponse response = http.send(request);
+
+        return response.getBody();
+    }
+     public static String ReviewsSearchCallout(String locale) {
+        
+        String Endpoint = sEndpoint + '/businesses/ZDobwIUDPdtyoFdnV-6jHA/reviews' + locale;
+        
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(Endpoint);
+        request.setMethod('GET');
+        request.setHeader('Authorization', apiKey);
+         
+        HttpResponse response = http.send(request);
+
+        return response.getBody();
+    }
+     public static String AutocompleteCallout(String locale, String text) {
+        
+        String Endpoint = sEndpoint + '/autocomplete' + locale + '&text' + text;
+        
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(Endpoint);
+        request.setMethod('GET');
+        request.setHeader('Authorization', apiKey);
+         
+        HttpResponse response = http.send(request);
+
+        return response.getBody();
+    }
+}

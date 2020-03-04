@@ -1,0 +1,26 @@
+<apex:page controller="AccountDisplay">
+    <apex:pageBlock title="Accounts List" id="block1">
+    <apex:pageBlockTable value="{! Accounts}" var="a" id="table1">
+        <apex:column headerValue="Account Name" width="50%">
+            <apex:outputLink value="/{!a.id}" style="font-size:16px;">{!a.Name}</apex:outputLink>
+        </apex:column>
+        <apex:column headerValue="Phone" width="50%">
+            <apex:outputLink value="/{!a.id}" style="font-size:16px;">{!a.Phone}</apex:outputLink>
+        </apex:column>
+        <apex:column breakBefore="true" id="column1">
+            <apex:pageBlockSection collapsible="true" title="Contacts" id="section1">
+            <apex:pageBlockTable value="{!a.Contacts}" var="c" id="table2">
+            <apex:column headerValue="Contact Name" width="50%">
+            <apex:outputLink value="/{!c.id}" style="font-size:16px;">{!c.Name}</apex:outputLink>
+        </apex:column>
+                <apex:column headerValue="Contact Email" width="50%">
+            <apex:outputLink value="/{!c.id}" style="font-size:16px;">{!c.Email}</apex:outputLink>
+        </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+        </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+    
+</apex:page>

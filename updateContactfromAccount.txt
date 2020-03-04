@@ -1,0 +1,18 @@
+trigger updateContactfromAccount on Account (after update) {
+
+     List <Contact> updateContact = [SELECT FirstName, LastName, Phone, AccountId
+	                              FROM Contact
+                                     WHERE accountId IN : Trigger.New
+	                              LIMIT 1];
+    
+    for(Account a : Trigger.new){
+        
+        String first = a.Name.subStringBefore(' ');
+        String last = a.Name.subStringAfter(' ');
+        updateContact.FirstName = first;
+        updateContact.LastName = last;
+        updateContact.Phone = a.Phone;
+		 
+    }
+    update updateContact;
+}

@@ -1,0 +1,44 @@
+trigger AccountTrigger on Account (before insert,before update,after insert,after update) {
+	
+    If(Trigger.isAfter){
+        Set<Id> accntIds=new Set<Id>();
+        // Get Id's of Account to get Contacts
+        for(Account accnt:Trigger.new){
+            accntIds.add(accnt.Id);
+        }
+        
+        //get 
+       	Map<Id,Contact> contactMap=new Map<Id, Contact>();
+        for(Contact ct:[Select Id,Name, AccountId from Contact where AccountId in :accntIds]){
+            contactMap.put(ct.AccountId,ct);
+        }
+        
+        List<Contact> ctList=new List<Contact>();
+        for(Account accnt:Trigger.new){
+           
+            Account oldAccnt=Trigger.oldMap!=null && Trigger.oldMap.containskey(accnt.Id)?Trigger.oldMap.get(accnt.Id):null;
+            	Contact ct=new Contact();
+
+            	if((oldAccnt!=null && accnt.Name!=oldAccnt.Name) || Trigger.IsInsert){
+                    if(contactMap.containsKey(accnt.Id)){
+                        ct=contactMap.get(accnt.Id);
+                    }
+                    	splitNames(ct,accnt);
+                     	
+                    	ct.Phone=accnt.Phone;
+                    	ct.AccountId=accnt.Id;
+                    	ctList.add(ct);
+
+                }
+                           
+        }
+        
+        if(!ctList.isEmpty())
+            upsert ctList;
+    }
+    
+    void splitNames(contact ct,Account accnt){
+        ct.FirstName=accnt.Name.substringbefore(' ');
+        ct.LastName=accnt.Name.substringAfter(' ');
+    }
+}

@@ -1,0 +1,19 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" >
+    <aura:registerEvent name="cEvent" type="c:candidateEvent"/>
+    <aura:attribute type="string" name="cName" />
+    <lightning:layout>
+    <p class="slds-align_absolute-center">
+        <lightning:card title="Create Candidate" iconName="custom:custom15">
+            <p class="slds-p-around_medium">
+                <lightning:input type="string" label="Candidate Name" value="{!v.cName}"></lightning:input>
+                <lightning:input type="string" label="Phone"></lightning:input>
+                <lightning:input type="string" label="Email"></lightning:input>
+                <br/>
+                <lightning:button variant="Brand" label="Submit" onclick="{!c.createCandidate}"/> 
+            </p>
+        </lightning:card>
+    </p>
+    <c:CandidateComponent/>
+    </lightning:layout>
+
+</aura:component>	

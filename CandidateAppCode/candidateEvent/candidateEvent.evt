@@ -1,0 +1,4 @@
+<aura:event type="Component" description="candidate event">
+
+    <aura:attribute type="Candidate__c" name="candidate"/>
+</aura:event>
